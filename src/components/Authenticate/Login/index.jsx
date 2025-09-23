@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, TextField, Button, Typography, Grid, Paper } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
@@ -8,7 +8,6 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "./../../../contexts/AuthProvider/context";
 import { userSignIn } from "./../../../contexts/AuthProvider/action";
 
-// Cria um tema para usar nas cores do Material-UI
 const theme = createTheme({
   palette: {
     primary: {
@@ -21,9 +20,20 @@ const theme = createTheme({
 });
 
 export const Login = () => {
-  const { userDispatch } = useContext(AuthContext);
+  const { userState, userDispatch } = useContext(AuthContext);
+  const { isAuthenticated } = userState;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    console.log("userState:", userState);
+    console.log("isAuthenticated:", isAuthenticated);
+    if (isAuthenticated) {
+      console.log("Authenticated successfully");
+    } else {
+      console.log("Not Authenticated");
+    }
+  });
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -31,8 +41,12 @@ export const Login = () => {
       await authService
         .authenticate(username, password)
         .then((result) => {
-          console.log("result", result);
-          userSignIn(userDispatch, result);
+          console.log("Auth result:", result);
+          const payload = {
+            encodedCredentials: btoa(`${username}:${password}`),
+            isAuthenticated: true,
+          };
+          userSignIn(userDispatch, payload);
           Navigate(location.state?.from ? location.state.from : "/");
         })
         .catch(() => {});

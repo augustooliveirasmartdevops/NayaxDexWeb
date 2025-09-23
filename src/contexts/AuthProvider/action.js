@@ -1,6 +1,7 @@
 import * as types from "./types";
 
 export const userSignIn = async (dispatch, payload) => {
+  console.log("payload", payload);
   dispatch({ type: types.SET_LOGIN, payload });
 };
 
