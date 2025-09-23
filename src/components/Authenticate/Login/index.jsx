@@ -7,6 +7,7 @@ import { authService } from "./../../../services/auth.service";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "./../../../contexts/AuthProvider/context";
 import { userSignIn } from "./../../../contexts/AuthProvider/action";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -20,20 +21,19 @@ const theme = createTheme({
 });
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { userState, userDispatch } = useContext(AuthContext);
   const { isAuthenticated } = userState;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    console.log("userState:", userState);
-    console.log("isAuthenticated:", isAuthenticated);
     if (isAuthenticated) {
-      console.log("Authenticated successfully");
-    } else {
-      console.log("Not Authenticated");
+      const from = location.state?.from?.pathname || "/dashboard";
+      navigate(from, { replace: true });
     }
-  });
+  }, [isAuthenticated, navigate, location.state]);
 
   const handleLogin = (event) => {
     event.preventDefault();
