@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import { PageNotFound } from "./pages/PageNotFound";
 import ProtectedRouter from "./protectedRouter";
-import { Login } from "./pages/Login";
+// import { LoginPage } from "./pages/Login";
 import { Home } from "./pages/Home/Home";
 import { DexUpload } from "./pages/Dex/UploadFIle";
 
 const Router = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      {/* <Route path="/login" element={<LoginPage />} /> */}
       <Route path="/">
         <Route index element={<Home />} />
       </Route>

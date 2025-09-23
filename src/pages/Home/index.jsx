@@ -1,5 +1,5 @@
-import HomeAppBar from "../../components/Authenticate/Login/Navigate/Appbar";
-import Login from "./../../components/Authenticate/Login/index";
+import HomeAppBar from "../../components/Navigate/Appbar";
+import Login from "../../components/Authenticate/Login";
 
 export const Home = () => {
   return (

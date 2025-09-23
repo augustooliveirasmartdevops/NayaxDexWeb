@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import { Container, Box, TextField, Button, Typography, Grid, Paper } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { Box, TextField, Button, Typography, Grid, Paper } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { authService } from "./../../../services/auth.service";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "./../../../contexts/AuthProvider/context";
+import { userSignIn } from "./../../../contexts/AuthProvider/action";
 
 // Cria um tema para usar nas cores do Material-UI
 const theme = createTheme({
@@ -16,7 +20,8 @@ const theme = createTheme({
   },
 });
 
-const Login = () => {
+export const Login = () => {
+  const { userDispatch } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,6 +32,17 @@ const Login = () => {
     // console.log("Username:", username);
     // console.log("Password:", password);
     // alert(`Tentativa de Login com\nUsername: ${username}\nPassword: ${password}`);
+
+    async function fetchData() {
+      await authService
+        .authenticate(username, password)
+        .then((result) => {
+          userSignIn(userDispatch, result);
+          Navigate(location.state?.from ? location.state.from : "/");
+        })
+        .catch(() => {});
+    }
+    fetchData();
   };
 
   return (

@@ -1,7 +1,5 @@
-import { handleLocalStorageCredentials } from "./handleLocalStorageCredentials";
-
 async function authHeaderJson() {
-  var credentials = handleLocalStorageCredentials.getCredentials();
+  var credentials = "";
 
   console.log("credentials", credentials);
 
