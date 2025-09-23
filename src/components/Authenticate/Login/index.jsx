@@ -27,16 +27,11 @@ export const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    // Lógica de login a ser implementada aqui.
-    // Por exemplo, enviar username e password para uma API.
-    // console.log("Username:", username);
-    // console.log("Password:", password);
-    // alert(`Tentativa de Login com\nUsername: ${username}\nPassword: ${password}`);
-
     async function fetchData() {
       await authService
         .authenticate(username, password)
         .then((result) => {
+          console.log("result", result);
           userSignIn(userDispatch, result);
           Navigate(location.state?.from ? location.state.from : "/");
         })
