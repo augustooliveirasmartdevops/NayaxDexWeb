@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -15,21 +15,24 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export default function InputFileUpload() {
+export default function DexUploader({ onFileSelect }) {
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    if (files) {
+      onFileSelect(files);
+    }
+  };
+
   return (
     <Button
       component="label"
       role={undefined}
-      variant="contained"
+      variant="outlined"
       tabIndex={-1}
       startIcon={<CloudUploadIcon />}
     >
       Upload DEX File
-      <VisuallyHiddenInput
-        type="file"
-        onChange={(event) => console.log(event.target.files)}
-        multiple
-      />
+      <VisuallyHiddenInput type="file" onChange={handleFileChange} />
     </Button>
   );
 }

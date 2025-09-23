@@ -4,11 +4,13 @@ import { buildHeaders } from "./../helpers/handleHeader";
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const timeout = import.meta.env.VITE_APP_API_TIMEOUT;
 
-export const authService = {
-  uploadfile: async (file) => {
-    let headers = await buildHeaders.authHeaderJson();
+export const dexService = {
+  uploadfile: async (formData, encodedCredentials) => {
+    let headers = await buildHeaders.authHeaderJson(encodedCredentials);
+    delete headers["Content-Type"];
+
     return await axios
-      .post(`${baseURL}uploadDexFile`, file, {
+      .post(`${baseURL}dataexchange/uploadDexFile`, formData, {
         timeout: timeout,
         headers: headers,
       })
