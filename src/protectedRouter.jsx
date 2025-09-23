@@ -8,7 +8,6 @@ const ProtectedRouter = () => {
   const location = useLocation();
 
   if (!isAuthenticated) {
-    // Save the location the user attempted to visit
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

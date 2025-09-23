@@ -3,9 +3,9 @@ import { Box, TextField, Button, Typography, Grid, Paper } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { authService } from "./../../../services/auth.service";
-import { AuthContext } from "./../../../contexts/AuthProvider/context";
-import { userSignIn } from "./../../../contexts/AuthProvider/action";
+import { authService } from "../../services/auth.service";
+import { AuthContext } from "../../contexts/AuthProvider/context";
+import { userSignIn } from "../../contexts/AuthProvider/action";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const theme = createTheme({

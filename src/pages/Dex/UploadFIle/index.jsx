@@ -1,7 +1,5 @@
+import InputFileUpload from "../../../components/ButtonFileUpload";
+
 export const DexUpload = () => {
-  return (
-    <>
-      <div>Upload file</div>
-    </>
-  );
+  return <InputFileUpload />;
 };

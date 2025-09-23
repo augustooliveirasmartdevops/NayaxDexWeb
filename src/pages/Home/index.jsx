@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/context";
 import { Button, Typography } from "@mui/material";
+import { SignInButton } from "../../components/SignInButton";
 
 export const Home = () => {
   const { userState } = useContext(AuthContext);
@@ -14,13 +15,9 @@ export const Home = () => {
       </Typography>
 
       {!isAuthenticated ? (
-        <Button variant="outlined" sx={{ mt: 3, mb: 2 }} component={Link} to="/login">
-          Sing in
-        </Button>
+        <SignInButton title="Sing in" navigateTo="/login" />
       ) : (
-        <Button variant="outlined" sx={{ mt: 3, mb: 2 }} component={Link} to="/dexupload">
-          Welcome! Go to Dex Upload
-        </Button>
+        <SignInButton title="Welcome! Go to Dex Upload" navigateTo="/dexupload" />
       )}
     </>
   );
