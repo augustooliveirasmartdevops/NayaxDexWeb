@@ -5,14 +5,14 @@ import { Box } from "@mui/material";
 import FileSubmit from "../../../components/FileSubmit";
 
 export const FileHandler = () => {
-  const [selectedFiles, setSelectedFiles] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
-    console.log("selectedFile", selectedFiles);
-  }, [selectedFiles]);
+    console.log("selectedFile", selectedFile);
+  }, [selectedFile]);
 
-  const handleFileSelected = (files) => {
-    setSelectedFiles(files);
+  const handleFileSelected = (file) => {
+    setSelectedFile(file);
   };
 
   return (
@@ -25,8 +25,8 @@ export const FileHandler = () => {
       }}
     >
       <DexUploader onFileSelect={handleFileSelected} />
-      <FileViewer files={selectedFiles} />
-      <FileSubmit files={selectedFiles} />
+      <FileViewer file={selectedFile} />
+      <FileSubmit file={selectedFile} />
     </Box>
   );
 };

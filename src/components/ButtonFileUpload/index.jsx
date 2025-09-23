@@ -17,9 +17,9 @@ const VisuallyHiddenInput = styled("input")({
 
 export default function DexUploader({ onFileSelect }) {
   const handleFileChange = (event) => {
-    const files = event.target.files;
-    if (files) {
-      onFileSelect(files);
+    const file = event.target.files[0];
+    if (file) {
+      onFileSelect(file);
     }
   };
 
