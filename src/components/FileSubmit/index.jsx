@@ -19,7 +19,6 @@ export default function FileSubmit({ files }) {
           formData.append("files", file);
         });
 
-        // formData.append("files", files);
         await dexService.uploadfile(formData, encodedCredentials);
       } catch (error) {
         console.error("Error uploading file:", error);

@@ -16,9 +16,9 @@ export default function FileViewer({ files }) {
     <Paper elevation={3} sx={{ p: 2, mt: 3 }}>
       <Typography variant="h6">Loaded File Details</Typography>
       <Box sx={{ mt: 1 }}>
-        <Typography variant="body2">Name: {files.name}</Typography>
-        <Typography variant="body2">Type: {files.type}</Typography>
-        <Typography variant="body2">Size: {files.size} bytes</Typography>
+        <Typography variant="body2">Name: {files[0].name}</Typography>
+        <Typography variant="body2">Type: {files[0].type}</Typography>
+        <Typography variant="body2">Size: {files[0].size} bytes</Typography>
       </Box>
     </Paper>
   );
