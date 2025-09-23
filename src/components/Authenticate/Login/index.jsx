@@ -4,7 +4,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { authService } from "./../../../services/auth.service";
-import { Navigate } from "react-router-dom";
 import { AuthContext } from "./../../../contexts/AuthProvider/context";
 import { userSignIn } from "./../../../contexts/AuthProvider/action";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -33,21 +32,22 @@ export const Login = () => {
       const from = location.state?.from?.pathname || "/";
       navigate(from, { replace: true });
     }
-  }, [isAuthenticated, navigate, location.state]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = (event) => {
     event.preventDefault();
     async function fetchData() {
       await authService
         .authenticate(username, password)
-        .then((result) => {
-          console.log("Auth result:", result);
+        .then(() => {
           const payload = {
             encodedCredentials: btoa(`${username}:${password}`),
             isAuthenticated: true,
           };
           userSignIn(userDispatch, payload);
-          Navigate(location.state?.from ? location.state.from : "/");
+          const from = location.state?.from?.pathname || "/";
+          navigate(from, { replace: true });
         })
         .catch(() => {});
     }

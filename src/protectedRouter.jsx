@@ -1,17 +1,18 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { AuthContext } from "./contexts/AuthProvider/context";
 import { useContext } from "react";
-import Router from "../../router";
 
 const ProtectedRouter = () => {
   const { userState } = useContext(AuthContext);
   const { isAuthenticated } = userState;
   const location = useLocation();
 
-  console.log("isAuthenticated", isAuthenticated);
-  console.log("location", location);
+  if (!isAuthenticated) {
+    // Save the location the user attempted to visit
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
-  return isAuthenticated ? <Router /> : <Navigate to="/" replace state={{ from: location }} />;
+  return <Outlet />;
 };
 
 export default ProtectedRouter;
