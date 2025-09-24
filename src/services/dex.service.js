@@ -9,16 +9,9 @@ export const dexService = {
     let headers = await buildHeaders.authHeaderJson(encodedCredentials);
     delete headers["Content-Type"];
 
-    return await axios
-      .post(`${baseURL}dataexchange/uploadDexFile`, formData, {
-        timeout: timeout,
-        headers: headers,
-      })
-      .then((result) => {
-        return result;
-      })
-      .catch((error) => {
-        return error;
-      });
+    return await axios.post(`${baseURL}dataexchange/uploadDexFile`, formData, {
+      timeout: timeout,
+      headers: headers,
+    });
   },
 };
