@@ -1,3 +1,9 @@
+import { Typography } from "@mui/material";
+
 export const PageNotFound = () => {
-  return <div>Page not found</div>;
+  return (
+    <Typography component="h1" variant="h5">
+      Page Not Found
+    </Typography>
+  );
 };

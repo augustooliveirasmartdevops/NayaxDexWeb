@@ -7,6 +7,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { AuthContext } from "../../../contexts/AuthProvider/context";
 import { useContext } from "react";
 import { SignInButton } from "../../SignInButton";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function HomeAppBar() {
   const { userState } = useContext(AuthContext);
@@ -19,14 +21,23 @@ function HomeAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Nayax - DEX
+            Nayax
           </Typography>
           {!isAuthenticated ? (
             <SignInButton title="Sing in" navigateTo="/login" />
           ) : (
-            <Typography variant="subtitle1" gutterBottom>
-              Welcome!
-            </Typography>
+            <>
+              <Button
+                variant="outlined"
+                color="default"
+                sx={{ mt: 3, mb: 2, mr: 2 }}
+                component={Link}
+                to={"/"}
+              >
+                Home
+              </Button>
+              <SignInButton title="Dex Upload" navigateTo="/dexupload" />
+            </>
           )}
         </Toolbar>
       </AppBar>
